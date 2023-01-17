@@ -1,0 +1,56 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --box-size: 125px;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: gray;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 50px;
+}
+
+.btn {
+  height: var(--box-size);
+  width: var(--box-size);
+  border: 7px solid black;
+  border-radius: 10px;
+}
+
+#green {
+  background-color: green;
+}
+#red {
+  background-color: red;
+}
+#yellow {
+  background-color: yellow;
+}
+#blue {
+  background-color: blue;
+}
+
+.button-container {
+  display: grid;
+  grid-template-columns: repeat(2, var(--box-size));
+  gap: 25px;
+}
+
+/* .btn:hover {
+    opacity: 50%;
+} */
