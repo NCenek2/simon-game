@@ -14,7 +14,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: gray;
+  background-color: rgb(139, 130, 130);
+}
+
+.level-title {
+  color: white;
+  text-transform: uppercase;
+  font-size: 2rem;
 }
 
 .game-container {
@@ -23,6 +29,7 @@ body {
   align-items: center;
   justify-content: center;
   row-gap: 50px;
+  text-align: center;
 }
 
 .btn {
@@ -51,6 +58,28 @@ body {
   gap: 25px;
 }
 
-/* .btn:hover {
-    opacity: 50%;
-} */
+@media (min-width: 768px) {
+  :root {
+    --box-size: 250px;
+  }
+  .level-title {
+    font-size: 4.5rem;
+  }
+  .btn {
+    border: 14px solid black;
+    border-radius: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --box-size: 350px;
+  }
+  .level-title {
+    font-size: 8rem;
+  }
+  .btn {
+    border: 21px solid black;
+    border-radius: 30px;
+  }
+}
