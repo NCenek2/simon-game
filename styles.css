@@ -60,26 +60,26 @@ body {
 
 @media (min-width: 768px) {
   :root {
-    --box-size: 250px;
+    --box-size: 150px;
   }
   .level-title {
-    font-size: 4.5rem;
+    font-size: 2.5rem;
   }
   .btn {
-    border: 14px solid black;
-    border-radius: 20px;
+    border: 7px solid black;
+    border-radius: 15px;
   }
 }
 
 @media (min-width: 1024px) {
   :root {
-    --box-size: 350px;
+    --box-size: 175px;
   }
   .level-title {
-    font-size: 8rem;
+    font-size: 3.5rem;
   }
   .btn {
-    border: 21px solid black;
-    border-radius: 30px;
+    border: 8px solid black;
+    border-radius: 20px;
   }
 }
