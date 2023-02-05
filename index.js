@@ -4,9 +4,9 @@ const buttonArray = ["red", "green", "blue", "yellow"];
 
 // Global Variables
 let currentLevel = 1;
-let index = 0;
-let gameChoices = [];
-let userChoices = [];
+let counter = 0;
+let gameChoices = new Queue();
+let userChoices = new Queue();
 let userPlaying;
 
 function myLoop() {
@@ -14,12 +14,13 @@ function myLoop() {
     // Controls Game Pick
     const randomNumber = buttonArray[Math.floor(Math.random() * buttonLength)];
     handleOpacity(randomNumber);
-    // Push the value into the game array
-    gameChoices.push(randomNumber);
-    // console.log(gameChoices, userChoices);
-    // Increase Index to Include More Choices Depending on Level
-    index++;
-    if (index < currentLevel) {
+
+    // Push the value into the game queue
+    gameChoices.enqueue(randomNumber);
+
+    // Increase counter to keep track of game clicks on level
+    counter++;
+    if (counter < currentLevel) {
       myLoop();
     } else {
       // Allows user to Click on Buttons After Test
@@ -29,31 +30,33 @@ function myLoop() {
 }
 
 function handleOpacity(id) {
-  $(`#${id}`).animate({ opacity: "25%" }).animate({ opacity: "100%" });
+  $(`#${id}`)
+    .animate({ opacity: "25%" }, 200)
+    .animate({ opacity: "100%" }, 200);
 }
 
-function compareChoices(levelArr, userArr) {
-  for (let i = 0; i < userArr.length; i++) {
-    if (levelArr[i] != userArr[i]) {
-      return false;
-    }
+function compareChoices(levelQueue, userQueue) {
+  if (levelQueue.dequeue() != userQueue.dequeue()) {
+    return false;
   }
   return true;
 }
 
 function resetLevelVariables() {
-  index = 0;
-  gameChoices = [];
-  userChoices = [];
+  counter = 0;
+  gameChoices.clear();
+  userChoices.clear();
 }
 
 function handleLevelChange(level, text) {
+  const delay = text == "Try Again!" ? 2000 : 750;
+
   $("h1").text(`${text}`);
   resetLevelVariables();
   setTimeout(() => {
     $("h1").text(`Level ${level}`);
     myLoop();
-  }, 1000);
+  }, delay);
   userPlaying = false;
 }
 
@@ -66,9 +69,10 @@ $(".btn").click(function (event) {
 
     // Push to User Choices on Clicks
     handleOpacity(event.target.id);
-    userChoices.push(`${event.target.id}`);
+    userChoices.enqueue(`${event.target.id}`);
 
-    if (gameChoices.length == userChoices.length && gameChoices.length > 0) {
+    // Handles Last Check Before Level Change
+    if (gameChoices.length == 1 && userChoices.length == 1) {
       if (compareChoices(gameChoices, userChoices)) {
         currentLevel++;
         text = `Level ${currentLevel}`;
